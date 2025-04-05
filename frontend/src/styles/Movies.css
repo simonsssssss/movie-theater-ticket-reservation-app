@@ -35,18 +35,22 @@
 
 #movies-list-item {
     border-radius: var(--border-radius-1);
-    margin-top: 35px;
     background-color: var(--color-1);
     color: black;
     font-weight: 500;
     max-width: 650px;
+    margin-top: 35px;
     margin-left: auto;
     margin-right: auto;
 }
 
 #movies-list-item-title {
     font-weight: 700;
-    font-size: 20px;
+    font-size: 25px;
+}
+
+#movies-list-item-details {
+    font-size: 17px;
 }
 
 #movies-list-item-image-img {
@@ -64,6 +68,7 @@
     display: inline-block; /* It ensures the wrapper fits the image size
     because inline-block elements shrink or expand to enclose their content,
     unlike block-level elements that typically occupy the full width of their container. */
+    cursor: pointer;
 }
 
 .movies-list-item-image-wrapper img {
@@ -100,4 +105,17 @@
 
 .modal-content {
     width: 900px;
+}
+
+#movies-list-item-screening-time {
+    border-radius: var(--border-radius-1);
+    color: black;
+    padding: 5px;
+    background-color: var(--color-3);
+    transition: var(--transition-3);
+    cursor: pointer;
+}
+
+#movies-list-item-screening-time:hover {
+    transform: var(--translateY);
 }

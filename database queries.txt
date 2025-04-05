@@ -1,5 +1,5 @@
 insert into movies (title_, directors, trailer_embed_url, screening_time, duration_in_minutes, genre,
-format_, movie_image_url) values ('Babygirl', '{Halina Reijn}', 'https://www.youtube.com/embed/-8Sx6U6Ou0Q?autoplay=1',
+format_, movie_image_url) values ('Babygirl', '{Halina Reijn}', 'https://www.youtube.com/embed/-8Sx6U6Ou0Q?autoplay=1&mute=0',
 '{
 2025-04-03 11:00:00, 2025-04-03 16:00:00,
 2025-04-04 11:00:00, 2025-04-04 16:00:00,
@@ -11,7 +11,7 @@ format_, movie_image_url) values ('Babygirl', '{Halina Reijn}', 'https://www.you
 }', 114, 'Thriller', '2D', 'https://upload.wikimedia.org/wikipedia/en/0/0c/Babygirl_%28film_poster%29.png');
 
 insert into movies (title_, directors, trailer_embed_url, screening_time, duration_in_minutes, genre,
-format_, movie_image_url) values ('The Outrun', '{Nora Fingscheidt}', 'https://www.youtube.com/embed/pFv-v_wFsK8?autoplay=1',
+format_, movie_image_url) values ('The Outrun', '{Nora Fingscheidt}', 'https://www.youtube.com/embed/pFv-v_wFsK8?autoplay=1&mute=0',
 '{
 2025-04-03 13:00:00, 2025-04-03 18:00:00,
 2025-04-04 13:00:00, 2025-04-04 18:00:00,
@@ -23,7 +23,7 @@ format_, movie_image_url) values ('The Outrun', '{Nora Fingscheidt}', 'https://w
 }', 118, 'Drama', '2D', 'https://upload.wikimedia.org/wikipedia/en/thumb/6/68/The_Outrun_poster.jpg/220px-The_Outrun_poster.jpg');
 
 insert into movies (title_, directors, trailer_embed_url, screening_time, duration_in_minutes, genre,
-format_, movie_image_url) values ('Gladiator II', '{Ridley Scott}', 'https://www.youtube.com/embed/4rgYUipGJNo?autoplay=1',
+format_, movie_image_url) values ('Gladiator II', '{Ridley Scott}', 'https://www.youtube.com/embed/4rgYUipGJNo?autoplay=1&mute=0',
 '{
 2025-04-03 15:00:00, 2025-04-03 19:00:00,
 2025-04-04 15:00:00, 2025-04-04 19:00:00,
@@ -35,7 +35,7 @@ format_, movie_image_url) values ('Gladiator II', '{Ridley Scott}', 'https://www
 }', 147, 'Action', '2D', 'https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Gladiator_II_%282024%29_poster.jpg/220px-Gladiator_II_%282024%29_poster.jpg');
 
 insert into movies (title_, directors, trailer_embed_url, screening_time, duration_in_minutes, genre,
-format_, movie_image_url) values ('Here', '{Robert Zemeckis}', 'https://www.youtube.com/embed/I_id-SkGU2k?autoplay=1',
+format_, movie_image_url) values ('Here', '{Robert Zemeckis}', 'https://www.youtube.com/embed/I_id-SkGU2k?autoplay=1&mute=0',
 '{
 2025-04-03 10:00:00, 2025-04-03 17:00:00,
 2025-04-04 10:00:00, 2025-04-04 17:00:00,
@@ -47,7 +47,7 @@ format_, movie_image_url) values ('Here', '{Robert Zemeckis}', 'https://www.yout
 }', 104, 'Drama', '2D', 'https://upload.wikimedia.org/wikipedia/en/thumb/4/43/Here_film_poster.jpg/220px-Here_film_poster.jpg');
 
 insert into movies (title_, directors, trailer_embed_url, screening_time, duration_in_minutes, genre,
-format_, movie_image_url) values ('Mufasa: The Lion King', '{Barry Jenkins}', 'https://www.youtube.com/embed/o17MF9vnabg?autoplay=1',
+format_, movie_image_url) values ('Mufasa: The Lion King', '{Barry Jenkins}', 'https://www.youtube.com/embed/o17MF9vnabg?autoplay=1&mute=0',
 '{
 2025-04-03 09:00:00, 2025-04-03 14:00:00,
 2025-04-04 09:00:00, 2025-04-04 14:00:00,
@@ -59,7 +59,7 @@ format_, movie_image_url) values ('Mufasa: The Lion King', '{Barry Jenkins}', 'h
 }', 117, 'Adventure', '2D', 'https://upload.wikimedia.org/wikipedia/en/thumb/0/0b/Mufasa_The_Lion_King_Movie_2024.jpeg/220px-Mufasa_The_Lion_King_Movie_2024.jpeg');
 
 insert into movies (title_, directors, trailer_embed_url, screening_time, duration_in_minutes, genre,
-format_, movie_image_url) values ('Paddington in Peru', '{Dougal Wilson}', 'https://www.youtube.com/embed/NTvudSGfHRI?autoplay=1',
+format_, movie_image_url) values ('Paddington in Peru', '{Dougal Wilson}', 'https://www.youtube.com/embed/NTvudSGfHRI?autoplay=1&mute=0',
 '{
 2025-04-03 10:00:00, 2025-04-03 15:00:00,
 2025-04-04 10:00:00, 2025-04-04 15:00:00,
@@ -71,7 +71,7 @@ format_, movie_image_url) values ('Paddington in Peru', '{Dougal Wilson}', 'http
 }', 106, 'Adventure', '2D', 'https://upload.wikimedia.org/wikipedia/en/thumb/5/5e/Paddington_in_Peru_poster.jpg/250px-Paddington_in_Peru_poster.jpg');
 
 insert into movies (title_, directors, trailer_embed_url, screening_time, duration_in_minutes, genre,
-format_, movie_image_url) values ('Sonic the Hedgehog 3', '{Jeff Fowler}', 'https://www.youtube.com/embed/qSu6i2iFMO0?autoplay=1',
+format_, movie_image_url) values ('Sonic the Hedgehog 3', '{Jeff Fowler}', 'https://www.youtube.com/embed/qSu6i2iFMO0?autoplay=1&mute=0',
 '{
 2025-04-03 13:00:00, 2025-04-03 17:00:00,
 2025-04-04 13:00:00, 2025-04-04 17:00:00,
@@ -83,7 +83,7 @@ format_, movie_image_url) values ('Sonic the Hedgehog 3', '{Jeff Fowler}', 'http
 }', 110, 'Adventure', '2D', 'https://upload.wikimedia.org/wikipedia/en/f/f2/Sonic_the_Hedgehog_3_film_poster.jpg');
 
 insert into movies (title_, directors, trailer_embed_url, screening_time, duration_in_minutes, genre,
-format_, movie_image_url) values ('We Live in Time', '{John Crowley}', 'https://www.youtube.com/embed/MH02yagHaNw?autoplay=1',
+format_, movie_image_url) values ('We Live in Time', '{John Crowley}', 'https://www.youtube.com/embed/MH02yagHaNw?autoplay=1&mute=0',
 '{
 2025-04-03 15:00:00, 2025-04-03 20:00:00,
 2025-04-04 15:00:00, 2025-04-04 20:00:00,

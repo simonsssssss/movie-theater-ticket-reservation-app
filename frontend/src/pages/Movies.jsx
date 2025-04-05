@@ -1,8 +1,13 @@
 import '../styles/Movies.css';
-import {useEffect, useState} from "react";
+import {useEffect, useState} from 'react';
 import Modal from '../components/Modal';
+import { setCookie, deleteCookie } from '../Utilities/cookieUtils';
+import { useNavigate } from 'react-router-dom';
+
+export const reservationCookieName = "reservationCookie";
 
 function Movies() {
+    const navigate = useNavigate();
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [isModalActive, setModalActive] = useState(false);
     const [dateIsSelected, setDateIsSelected] = useState(false);
@@ -31,6 +36,15 @@ function Movies() {
     const currentDateWithoutTime = currentDate.split("T")[0];
     date.setMonth(date.getMonth() + 1);
     const maxPickerDate = date.toJSON().split("T")[0];
+    function formatDateString(inputDate) {
+        const dateParts = inputDate.split('-');
+        const year = dateParts[0];
+        const month = dateParts[1];
+        const day = dateParts[2];
+        const formattedDay = day.padStart(2, '0'); // Ensure day and month are two digits by padding with leading zeros if necessary
+        const formattedMonth = month.padStart(2, '0');
+        return `${formattedDay}-${formattedMonth}-${year}`;
+    }
     const handleChange = (e) => {
         const newDate = e.target.value;
         if(!newDate || !newDate.trim()) {
@@ -44,20 +58,26 @@ function Movies() {
     const openModal = () => {
         setModalActive(true);
         document.body.style.overflow = 'hidden';
-    }
+    };
     const closeModal = () => {
         document.body.style.overflow = '';
         setModalActive(false);
-    }
+    };
     const handleClickForSelectedMovie = (movieId) => {
         setSelectedMovie(movieId);
         openModal();
-    }
+    };
+    const handleClickForSelectedScreeningTime = (movie, time) => {
+        deleteCookie(reservationCookieName);
+        const info = movie.title_ + ";" + movie.genre + ";" + movie.duration_in_minutes + ";" + movie.format_ + ";" + time;
+        setCookie(reservationCookieName, info);
+        navigate('/seats');
+    };
     return (
         <div className="movie-showtimes">
             {
                 dateIsSelected ? (
-                    <h1 className="title is-2" id="movie-showtimes-h1">Showtimes For {datePickerValue}</h1>
+                    <h1 className="title is-2" id="movie-showtimes-h1">Showtimes For {formatDateString(datePickerValue)}</h1>
                 ) : (
                     <h1 className="title is-2" id="movie-showtimes-h1">Select Date To View Showtimes</h1>
                 )
@@ -82,10 +102,30 @@ function Movies() {
                                                 </div>
                                             </div>
                                             <div className="cell">
-                                                <span id="movies-list-item-title">{movie.title_}</span><br />
-                                                {movie.genre + " "}
-                                                | {movie.duration_in_minutes} min
-                                                | {movie.format_}
+                                                <span id="movies-list-item-title">{movie.title_}</span>
+                                                <br />
+                                                <span id="movies-list-item-details">
+                                                    {movie.genre + " "}
+                                                    | {movie.duration_in_minutes} min
+                                                    | {movie.format_}
+                                                </span>
+                                                <br /><br />
+                                                {
+                                                    movie.screening_time.map((time, index) => {
+                                                        if(time.split('T')[0] === datePickerValue) {
+                                                            return <div className="box" id="movies-list-item-screening-time" key={index} onClick={() => handleClickForSelectedScreeningTime(movie, time)}>
+                                                                {
+                                                                    new Date(time).toLocaleTimeString([], {
+                                                                        hour: '2-digit',
+                                                                        minute: '2-digit',
+                                                                        hour12: false,
+                                                                    })
+                                                                }
+                                                            </div>
+                                                        }
+                                                        return <div key={index}></div>
+                                                    })
+                                                }
                                             </div>
                                         </div>
                                     </div>

@@ -1,0 +1,13 @@
+.seats {
+    text-align: center;
+}
+
+#seats-h1-title-large {
+    color: white;
+    padding-top: 20px;
+}
+
+#seats-h1-title-small {
+    color: white;
+    padding-top: 15px;
+}
