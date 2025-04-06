@@ -33,6 +33,34 @@ function Seats() {
                     new Date(decodedCookieValue[4]).toLocaleDateString('en-GB').replace(/\//g, '-')
                 }
             </h1>
+            <div className="seats-seats-selection">
+                <div className="seats-seats-selection-screen"></div>
+                <div className="seats-seats-selection-screen-glow"></div>
+                {
+                    Array.from({ length: 12 }, (_, index) => (
+                        <div className="seats-seats-selection-screen-row" key={index}>
+                            {/*<div className="seats-seats-selection-screen-row-number">{index + 1}</div>*/}
+                            <div className="seats-seats-selection-screen-row-seat"></div>
+                            <div className="seats-seats-selection-screen-row-seat"></div>
+                            <div className="seats-seats-selection-screen-row-seat"></div>
+                            <div className="seats-seats-selection-screen-row-seat"></div>
+                            <div className="seats-seats-selection-screen-row-seat"></div>
+                            <div className="seats-seats-selection-screen-row-seat"></div>
+                            <div className="seats-seats-selection-screen-row-seat"></div>
+                            <div className="seats-seats-selection-screen-row-seat"></div>
+                            <div className="seats-seats-selection-screen-row-alley"></div>
+                            <div className="seats-seats-selection-screen-row-seat"></div>
+                            <div className="seats-seats-selection-screen-row-seat"></div>
+                            <div className="seats-seats-selection-screen-row-seat"></div>
+                            <div className="seats-seats-selection-screen-row-seat"></div>
+                            <div className="seats-seats-selection-screen-row-seat"></div>
+                            <div className="seats-seats-selection-screen-row-seat"></div>
+                            <div className="seats-seats-selection-screen-row-seat"></div>
+                            <div className="seats-seats-selection-screen-row-seat"></div>
+                        </div>
+                    ))
+                }
+            </div>
         </div>
     );
 }
