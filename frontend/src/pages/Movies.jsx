@@ -41,7 +41,7 @@ function Movies() {
         const year = dateParts[0];
         const month = dateParts[1];
         const day = dateParts[2];
-        const formattedDay = day.padStart(2, '0'); // Ensure day and month are two digits by padding with leading zeros if necessary
+        const formattedDay = day.padStart(2, '0'); // Ensures that day and month are two digits by padding with leading zeros if necessary
         const formattedMonth = month.padStart(2, '0');
         return `${formattedDay}-${formattedMonth}-${year}`;
     }
