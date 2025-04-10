@@ -70,6 +70,26 @@
     width: 100px;
 }
 
+#seats-selected-seats-number {
+    margin-top: 27px;
+    color: white;
+    opacity: 90%;
+}
+
+#seats-submit-selected-seats-button {
+    background-color: white;
+    opacity: 90%;
+    transition: var(--transition-2);
+}
+
+#seats-submit-selected-seats-button:hover {
+    opacity: 50%;
+}
+
+.seats-submit-selected-seats-button-label {
+    margin-left: 11px;
+}
+
 @media only screen and (max-width: 800px) { /* Apply styles for screens smaller than or equal to this value */
     html {
         width: 800px;

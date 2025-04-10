@@ -1,7 +1,7 @@
 import '../styles/Seats.css';
 import { reservationCookieName } from './Movies';
 import { useNavigate } from 'react-router-dom';
-import { getCookie } from '../Utilities/cookieUtils';
+import {deleteCookie, getCookie, setCookie} from '../Utilities/cookieUtils';
 import { useEffect, useState, useRef } from 'react';
 
 function Seats() {
@@ -11,7 +11,9 @@ function Seats() {
     const navigate = useNavigate();
     useEffect(() => {
         const reservationCookie = getCookie(reservationCookieName);
-        if (!reservationCookie) {
+        const cookieString = decodeURIComponent(reservationCookie);
+        const regex = /^[^;]+;[^;]+;\d+;[^;]+;\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z(?:;[^;]*)?$/;
+        if (!reservationCookie || !regex.test(cookieString)) {
             navigate('/');
         }
     }, [navigate]);
@@ -26,6 +28,28 @@ function Seats() {
                 index === seatId ? !item : item
             )
         );
+    };
+    const getTruthyIndices = (arr) => {
+        return arr.reduce((indices, value, index) => {
+            if (value) {
+                indices.push(index);
+            }
+            return indices;
+        }, []);
+    };
+    const handleClickForSavingSeats = () => {
+        deleteCookie(reservationCookieName);
+        let selectedSeatsIds = "";
+        const truthyIndices = getTruthyIndices(seatIsSelected);
+        truthyIndices.forEach((truthyIndex,index) => {
+            if(index !== 0) {
+                selectedSeatsIds += "-";
+            }
+            selectedSeatsIds += truthyIndex;
+        });
+        const cookieContent = title + ";" + genre + ";" + durationInMinutes + ";" + format + ";" + screeningTime + ";" + selectedSeatsIds;
+        setCookie(reservationCookieName, cookieContent);
+        navigate('/reservation-edit');
     };
     return (
         <div className="seats">
@@ -55,6 +79,9 @@ function Seats() {
                                         className="seats-seats-selection-screen-row-seat"
                                         ref={el => seatsRef.current[rowIndex * 16 + seatIndex] = rowIndex * 16 + seatIndex}
                                         onClick={() => handleSeatSelection(rowIndex * 16 + seatIndex)}
+                                        style={{
+                                            backgroundColor: seatIsSelected[rowIndex * 16 + seatIndex] ? 'green' : ''
+                                        }}
                                         key={seatIndex}>
                                     </div>
                                 ))
@@ -66,12 +93,24 @@ function Seats() {
                                         className="seats-seats-selection-screen-row-seat"
                                         ref={el => seatsRef.current[rowIndex * 16 + seatIndex + 8] = rowIndex * 16 + seatIndex + 8}
                                         onClick={() => handleSeatSelection(rowIndex * 16 + seatIndex + 8)}
+                                        style={{
+                                            backgroundColor: seatIsSelected[rowIndex * 16 + seatIndex + 8] ? 'green' : ''
+                                        }}
                                         key={seatIndex}>
                                     </div>
                                 ))
                             }
                         </div>
                     ))
+                }
+                <div className="title is-5" id="seats-selected-seats-number">The number of selected seats: { seatIsSelected.filter(Boolean).length }</div>
+                {
+                    seatIsSelected.filter(Boolean).length > 0 ? (
+                        <div className="button" id="seats-submit-selected-seats-button" onClick={handleClickForSavingSeats}>
+                            <i className="fa-solid fa-check"></i>
+                            <span className="seats-submit-selected-seats-button-label">Save</span>
+                        </div>
+                    ) : null
                 }
             </div>
         </div>
