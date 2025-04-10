@@ -2,11 +2,10 @@ import '../styles/Seats.css';
 import { reservationCookieName } from './Movies';
 import { useNavigate } from 'react-router-dom';
 import {deleteCookie, getCookie, setCookie} from '../Utilities/cookieUtils';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState} from 'react';
 
 function Seats() {
     const [seatIsSelected, setSeatIsSelected] = useState(Array(192).fill(false));
-    const seatsRef = useRef([]);
     const [decodedCookieValue, setDecodedCookieValue] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
@@ -77,7 +76,6 @@ function Seats() {
                                 Array.from({ length: 8 }, (_, seatIndex) => (
                                     <div
                                         className="seats-seats-selection-screen-row-seat"
-                                        ref={el => seatsRef.current[rowIndex * 16 + seatIndex] = rowIndex * 16 + seatIndex}
                                         onClick={() => handleSeatSelection(rowIndex * 16 + seatIndex)}
                                         style={{
                                             backgroundColor: seatIsSelected[rowIndex * 16 + seatIndex] ? 'green' : ''
@@ -91,7 +89,6 @@ function Seats() {
                                 Array.from({ length: 8 }, (_, seatIndex) => (
                                     <div
                                         className="seats-seats-selection-screen-row-seat"
-                                        ref={el => seatsRef.current[rowIndex * 16 + seatIndex + 8] = rowIndex * 16 + seatIndex + 8}
                                         onClick={() => handleSeatSelection(rowIndex * 16 + seatIndex + 8)}
                                         style={{
                                             backgroundColor: seatIsSelected[rowIndex * 16 + seatIndex + 8] ? 'green' : ''
