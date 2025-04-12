@@ -19,7 +19,7 @@ function Seats() {
     const decodedString = decodeURIComponent(getCookie(reservationCookieName));
     const [title, genre, durationInMinutes, format, screeningTime] = decodedString.split(';');
     useEffect(() => {
-        setDecodedCookieValue([title, genre, durationInMinutes, format, screeningTime])
+        setDecodedCookieValue([title, genre, durationInMinutes, format, screeningTime]);
     }, [title, genre, durationInMinutes, format, screeningTime]);
     const handleSeatSelection = (seatId) => {
         setSeatIsSelected((prevSelections) =>
