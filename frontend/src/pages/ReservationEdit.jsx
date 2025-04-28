@@ -8,7 +8,7 @@ function ReservationEdit() {
     const [cookieContent, setCookieContent] = useState([]);
     const decodedCookieContent = decodeURIComponent(getCookie(reservationCookieName));
     const [title, genre, durationInMinutes, format, screeningTime, selectedSeatsIds] = decodedCookieContent.split(';');
-    const [isDropdownActive, setIsDropdownActive] = useState(false);
+    const [selectedDropdownOption, setSelectedDropdownOption] = useState(Array(cookieContent[5]?.length || 0).fill("standard"));
     useEffect(() => {
         setCookieContent([title, genre, durationInMinutes, format, screeningTime, selectedSeatsIds.split('-')]);
     }, [title, genre, durationInMinutes, format, screeningTime, selectedSeatsIds]);
@@ -20,8 +20,15 @@ function ReservationEdit() {
             navigate('/');
         }
     }, [navigate]);
-    const toggleDropdown = () => {
-        setIsDropdownActive(!isDropdownActive);
+    useEffect(() => {
+        if (cookieContent[5] && cookieContent[5].length > 0) {
+            setSelectedDropdownOption(Array(cookieContent[5].length).fill("standard"));
+        }
+    }, [cookieContent]);
+    const handleDropdownOptionSelection = (event, index) => {
+        const newSelections = [...selectedDropdownOption];
+        newSelections[index] = event.target.value;
+        setSelectedDropdownOption(newSelections);
     };
     return (
         <div className="reservation-edit">
@@ -54,23 +61,12 @@ function ReservationEdit() {
                         </div>
                         <div className="reservation-edit-space-3"></div>
                         <div className="reservation-edit-ticket-list-item-content">
-                            Type:
-                            <div className={`dropdown ${isDropdownActive ? 'is-active' : ''}`}>
-                                <div className="dropdown-trigger">
-                                    <button className="button" id="reservation-edit-ticket-list-item-content-dropdown-button" onClick={toggleDropdown}>
-                                        <span className="reservation-edit-ticket-list-item-content-dropdown-button-label">sdf</span>
-                                        <i className="fas fa-angle-down"></i>
-                                    </button>
-                                </div>
-                                <div className="dropdown-menu">
-                                    <div className="dropdown-content">
-                                        <button className="dropdown-item">ljkhkljh</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="reservation-edit-ticket-list-item-content">
-                            Price:
+                            <select className="reservation-edit-ticket-list-item-content-dropdown" onChange={(e) => handleDropdownOptionSelection(e, index)}>
+                                <option className="reservation-edit-ticket-list-item-content-dropdown-option" value="standard">Standard | {"\u00A3"}10</option>
+                                <option className="reservation-edit-ticket-list-item-content-dropdown-option" value="child">Child | {"\u00A3"}5</option>
+                                <option className="reservation-edit-ticket-list-item-content-dropdown-option" value="student">Student | {"\u00A3"}8</option>
+                                <option className="reservation-edit-ticket-list-item-content-dropdown-option" value="senior">Senior | {"\u00A3"}7</option>
+                            </select>
                         </div>
                     </div>
                 ))
