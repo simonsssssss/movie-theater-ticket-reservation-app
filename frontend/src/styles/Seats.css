@@ -90,6 +90,10 @@
     margin-left: 11px;
 }
 
+.seats-space {
+    padding-bottom: 20px;
+}
+
 @media only screen and (max-width: 800px) { /* Apply styles for screens smaller than or equal to this value */
     html {
         width: 800px;

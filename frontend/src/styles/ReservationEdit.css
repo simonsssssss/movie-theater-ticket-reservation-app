@@ -61,6 +61,20 @@
     font-weight: 500;
 }
 
+#reservation-edit-submit-tickets-button {
+    background-color: white;
+    opacity: 90%;
+    transition: var(--transition-2);
+}
+
+#reservation-edit-submit-tickets-button:hover {
+    opacity: 50%;
+}
+
+.reservation-edit-submit-tickets-button-label {
+    margin-left: 11px;
+}
+
 .reservation-edit-space-2 {
     padding-bottom: 20px;
 }

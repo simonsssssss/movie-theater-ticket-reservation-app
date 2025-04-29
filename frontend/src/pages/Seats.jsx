@@ -10,7 +10,7 @@ function Seats() {
     useEffect(() => {
         const reservationCookie = getCookie(reservationCookieName);
         const cookieString = decodeURIComponent(reservationCookie);
-        const regex = /^[^;]+;[^;]+;\d+;[^;]+;\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z(?:;[^;]*)?$/;
+        const regex = /^[^;]+;[^;]+;\d+;[^;]+;\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z.*$/;
         if (!reservationCookie || !regex.test(cookieString)) {
             navigate('/');
         }
@@ -108,6 +108,7 @@ function Seats() {
                         </div>
                     ) : null
                 }
+                <div className="seats-space"></div>
             </div>
         </div>
     );

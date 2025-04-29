@@ -1,16 +1,16 @@
 import '../styles/ReservationEdit.css';
 import { reservationCookieName } from './Movies';
 import { useNavigate } from 'react-router-dom';
-import {getCookie} from '../Utilities/cookieUtils';
+import {deleteCookie, getCookie, setCookie} from '../Utilities/cookieUtils';
 import { useEffect, useState} from 'react';
 function ReservationEdit() {
     const navigate = useNavigate();
     const [cookieContent, setCookieContent] = useState([]);
     const decodedCookieContent = decodeURIComponent(getCookie(reservationCookieName));
-    const [title, genre, durationInMinutes, format, screeningTime, selectedSeatsIds] = decodedCookieContent.split(';');
+    const [title, genre, durationInMinutes, format, screeningTime, selectedSeatsIds] = decodedCookieContent?.split(';');
     const [selectedDropdownOption, setSelectedDropdownOption] = useState(Array(cookieContent[5]?.length || 0).fill("standard"));
     useEffect(() => {
-        setCookieContent([title, genre, durationInMinutes, format, screeningTime, selectedSeatsIds.split('-')]);
+        setCookieContent([title, genre, durationInMinutes, format, screeningTime, selectedSeatsIds?.split('-')]);
     }, [title, genre, durationInMinutes, format, screeningTime, selectedSeatsIds]);
     useEffect(() => {
         const reservationCookie = getCookie(reservationCookieName);
@@ -29,6 +29,13 @@ function ReservationEdit() {
         const newSelections = [...selectedDropdownOption];
         newSelections[index] = event.target.value;
         setSelectedDropdownOption(newSelections);
+    };
+    const handleTicketsSubmission = () => {
+        deleteCookie(reservationCookieName);
+        const ticketTypes = selectedDropdownOption.join('-');
+        const newCookieContent = title + ";" + genre + ";" + durationInMinutes + ";" + format + ";" + screeningTime + ";" + selectedSeatsIds + ";" + ticketTypes;
+        setCookie(reservationCookieName, newCookieContent);
+        navigate('/user-information');
     };
     return (
         <div className="reservation-edit">
@@ -53,7 +60,7 @@ function ReservationEdit() {
             </h1>
             <div className="reservation-edit-space-1"></div>
             {
-                cookieContent[5]?.toString().split(',').map((seatId,index) => (
+                cookieContent[5]?.toString()?.split(',').map((seatId,index) => (
                     <div className="box" id="reservation-edit-ticket-list-item" key={index}>
                         <div className="reservation-edit-ticket-list-item-header">
                             Row: {Math.floor(seatId / 16) + 1 + " | "}
@@ -71,6 +78,10 @@ function ReservationEdit() {
                     </div>
                 ))
             }
+            <div className="button" id="reservation-edit-submit-tickets-button" onClick={handleTicketsSubmission}>
+                <i className="fa-solid fa-check"></i>
+                <span className="reservation-edit-submit-tickets-button-label">Save</span>
+            </div>
             <div className="reservation-edit-space-2"></div>
         </div>
     );
