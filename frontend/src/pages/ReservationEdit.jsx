@@ -15,7 +15,7 @@ function ReservationEdit() {
     useEffect(() => {
         const reservationCookie = getCookie(reservationCookieName);
         const decodedCookieContent = decodeURIComponent(reservationCookie);
-        const regex = /^([^;]+;){2}([1-9]\d*);[^;]+;(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z)(?:;.*)?$/;
+        const regex = /^[^;]*;[^;]*;[1-9]\d*;[^;]*;\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z;(?:\d{1,3}-)*\d{1,3}.*$/;
         if (!reservationCookie || !regex.test(decodedCookieContent)) {
             navigate('/');
         }
