@@ -2,7 +2,7 @@ import '../styles/ReservationEdit.css';
 import { reservationCookieName } from './Movies';
 import { useNavigate } from 'react-router-dom';
 import {deleteCookie, getCookie, setCookie} from '../Utilities/cookieUtils';
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 function ReservationEdit() {
     const navigate = useNavigate();
     const [cookieContent, setCookieContent] = useState([]);
