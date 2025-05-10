@@ -1,16 +1,20 @@
 import '../styles/UserInfo.css';
 import { reservationCookieName } from './Movies';
-import { getCookie } from "../Utilities/cookieUtils";
+import {deleteCookie, getCookie} from "../Utilities/cookieUtils";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 function UserInfo() {
     const navigate = useNavigate();
+    const [cookieContent, setCookieContent] = useState([]);
     const decodedCookieContent = decodeURIComponent(getCookie(reservationCookieName));
     const [title, genre, durationInMinutes, format, screeningTime, selectedSeatsIds, ticketTypes] = decodedCookieContent?.split(';');
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [confirmEmail, setConfirmEmail] = useState("");
     const [errors, setErrors] = useState({});
+    useEffect(() => {
+        setCookieContent([title, genre, durationInMinutes, format, screeningTime, selectedSeatsIds?.split('-'), ticketTypes?.split('-')]);
+    }, [title, genre, durationInMinutes, format, screeningTime, selectedSeatsIds, ticketTypes]);
     useEffect(() => {
         const reservationCookie = getCookie(reservationCookieName);
         const decodedCookieContent = decodeURIComponent(reservationCookie);
@@ -42,7 +46,8 @@ function UserInfo() {
     };
     const handleUserInformationSubmission = () => {
         if(validateForm()) {
-            navigate('/confirmation');
+            /*deleteCookie(reservationCookieName);
+            navigate('/confirmation');*/
         }
     };
     return (
@@ -50,10 +55,10 @@ function UserInfo() {
             <h1 className="title is-2" id="user-information-h1-title-large">Enter your information</h1>
             <div className="user-information-space-1"></div>
             <div className="field" id="user-information-field">
-                <label className="label" id="user-information-field-label">Full Name</label>
+                <label className="label" id="user-information-field-label" htmlFor="user-information-field-full-name-input">Full Name</label>
                 <input
                     className={`input ${errors.fullName ? 'is-danger' : ''}`}
-                    id="user-information-field-input"
+                    id="user-information-field-full-name-input"
                     type="text"
                     placeholder="Enter your full name"
                     onChange={(e) => setFullName(e.target.value)}>
@@ -61,10 +66,10 @@ function UserInfo() {
                 {errors.fullName && <p className="help is-danger is-size-6">{errors.fullName}</p>}
             </div>
             <div className="field" id="user-information-field">
-                <label className="label" id="user-information-field-label">Email</label>
+                <label className="label" id="user-information-field-label" htmlFor="user-information-field-email-input">Email</label>
                 <input
                     className={`input ${errors.email ? 'is-danger' : ''}`}
-                    id="user-information-field-input"
+                    id="user-information-field-email-input"
                     type="email"
                     placeholder="Enter your email"
                     onChange={(e) => setEmail(e.target.value)}>
@@ -72,10 +77,10 @@ function UserInfo() {
                 {errors.email && <p className="help is-danger is-size-6">{errors.email}</p>}
             </div>
             <div className="field" id="user-information-field">
-                <label className="label" id="user-information-field-label">Confirm Email</label>
+                <label className="label" id="user-information-field-label" htmlFor="user-information-field-confirm-email-input">Confirm Email</label>
                 <input
                     className={`input ${errors.confirmEmail ? 'is-danger' : ''}`}
-                    id="user-information-field-input"
+                    id="user-information-field-confirm-email-input"
                     type="email"
                     placeholder="Re-enter your email"
                     onChange={(e) => setConfirmEmail(e.target.value)}>
