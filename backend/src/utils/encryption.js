@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 // Ensure the encryption key is a 64-character hexadecimal string (32 bytes)
 // Store this securely, e.g., in environment variables
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY; // e.g., '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
 
 // AES block size for CBC mode is 16 bytes
 const IV_LENGTH = 16;
