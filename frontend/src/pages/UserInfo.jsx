@@ -44,7 +44,7 @@ function UserInfo() {
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0; // Checks if the newErrors object has any own enumerable properties. If it returns true, it means the object is empty - there are no keys (i.e., no properties)
     };
-    const handleUserInformationSubmission = () => {
+    const handleUserInformationSubmission = async () => {
         if(validateForm()) {
             /*deleteCookie(reservationCookieName);
             navigate('/confirmation');*/

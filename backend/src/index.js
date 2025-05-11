@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const os = require('os');
-const pool = require('./db');
+const pool = require('./database/db');
+const { encrypt } = require('./utils/encryption');
 
 const app = express();
 const port = 4000;
@@ -31,27 +32,16 @@ app.post('/movies', async (req, res) => {
     }
 });
 
-app.get('/movie/:id', async (req, res) => {
-    const { id } = req.params;
-    try {
-        const movie = await pool.query('SELECT * FROM movies WHERE id = $1', [id]);
-        if (movie.rows.length === 0) {
-            return res.status(404).json({ error: 'Movie not found' });
-        }
-        res.json(movie.rows[0]);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
-
 app.post('/addTicketReservation', async (req, res) => {
-    const { full_name, email, movie_title, screening_time, ticket_type, ticket_price, row_number_, seat_number, movie_theater_name, movie_theater_address, auditorium_number } = req.body;
+    const { full_name, email, movie_title, format, screening_time, auditorium_number, row_and_seat_numbers, ticket_types_and_prices, ticket_reservation_number } = req.body;
     try {
+        const encryptedFullName = encrypt(full_name);
+        const encryptedEmail = encrypt(email);
         const newTicketReservation = await pool.query(
-            'INSERT INTO ticket_reservations (full_name, email, movie_title, screening_time, ticket_type, ticket_price, row_number_, seat_number, movie_theater_name, movie_theater_address, auditorium_number) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',
-            [full_name, email, movie_title, screening_time, ticket_type, ticket_price, row_number_, seat_number, movie_theater_name, movie_theater_address, auditorium_number]
+            'INSERT INTO ticket_reservations (full_name, email, movie_title, format, screening_time, auditorium_number, row_and_seat_numbers, ticket_types_and_prices, ticket_reservation_number) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
+            [encryptedFullName, encryptedEmail, movie_title, format, screening_time, auditorium_number, row_and_seat_numbers, ticket_types_and_prices, ticket_reservation_number]
         );
-        res.status(201).json(newTicketReservation.rows[0]);
+        res.status(201).json(newTicketReservation.rows[0]); // Represents the first and presumably only row of the result set returned from the query
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

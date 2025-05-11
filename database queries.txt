@@ -96,12 +96,13 @@ format_, movie_image_url) values ('We Live in Time', '{John Crowley}', 'https://
 
 CREATE TABLE ticket_reservations (
     id SERIAL PRIMARY KEY,
-    full_name VARCHAR(150) NOT NULL,
-    email VARCHAR(254) NOT NULL,
+    full_name TEXT NOT NULL,
+    email TEXT NOT NULL,
     movie_title VARCHAR(100) NOT NULL,
     format VARCHAR(30) NOT NULL,
     screening_time VARCHAR(40) NOT NULL,
 	auditorium_number INTEGER CHECK (auditorium_number >= 1 AND auditorium_number <= 10) NOT NULL,
 	row_and_seat_numbers NUMERIC(2)[][] NOT NULL,
-    ticket_types_and_prices VARCHAR(10)[][] NOT NULL
+    ticket_types_and_prices VARCHAR(10)[][] NOT NULL,
+    ticket_reservation_number INTEGER UNIQUE CHECK (ticket_reservation_number > 0) NOT NULL
 );
