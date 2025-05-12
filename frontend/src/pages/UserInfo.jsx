@@ -1,6 +1,6 @@
 import '../styles/UserInfo.css';
 import { reservationCookieName } from './Movies';
-import {deleteCookie, getCookie} from "../Utilities/cookieUtils";
+import { deleteCookie, getCookie, setCookie } from "../Utilities/cookieUtils";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 function UserInfo() {
@@ -27,16 +27,16 @@ function UserInfo() {
         const newErrors = {};
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!fullName.trim()) {
-            newErrors.fullName = 'Full name is required';
+            newErrors.fullName = "Full name is required";
         }
         if(!email.trim()) {
-            newErrors.email = 'Email is required';
+            newErrors.email = "Email is required";
         }
         else if(!emailRegex.test(email)) {
             newErrors.email = "Please enter a valid email address";
         }
         if(!confirmEmail.trim()) {
-            newErrors.confirmEmail = 'Please confirm your email';
+            newErrors.confirmEmail = "Please confirm your email";
         }
         else if(email !== confirmEmail) {
             newErrors.confirmEmail = "Email addresses do not match";
@@ -44,10 +44,36 @@ function UserInfo() {
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0; // Checks if the newErrors object has any own enumerable properties. If it returns true, it means the object is empty - there are no keys (i.e., no properties)
     };
+    function getRandomIntegerFromTo(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
     const handleUserInformationSubmission = async () => {
         if(validateForm()) {
-            /*deleteCookie(reservationCookieName);
-            navigate('/confirmation');*/
+            deleteCookie(reservationCookieName);
+            const requestData = {
+                fullName: fullName,
+                email: email,
+                movieTitle: cookieContent[0],
+                format: cookieContent[3],
+                screeningTime: cookieContent[4],
+                auditoriumNumber: getRandomIntegerFromTo(1, 10),
+                seatIds: cookieContent[5],
+                ticketTypes: cookieContent[6]
+            };
+            try {
+                const response = await fetch('http://localhost:4000/addTicketReservation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestData),
+                });
+                const data = await response.json();
+                setCookie(reservationCookieName, data.id);
+            } catch (error) {
+                console.error("Error saving ticket reservation data");
+            }
+            navigate('/confirmation');
         }
     };
     return (

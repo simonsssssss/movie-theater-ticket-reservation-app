@@ -101,8 +101,7 @@ CREATE TABLE ticket_reservations (
     movie_title VARCHAR(100) NOT NULL,
     format VARCHAR(30) NOT NULL,
     screening_time VARCHAR(40) NOT NULL,
-	auditorium_number INTEGER CHECK (auditorium_number >= 1 AND auditorium_number <= 10) NOT NULL,
-	row_and_seat_numbers NUMERIC(2)[][] NOT NULL,
-    ticket_types_and_prices VARCHAR(10)[][] NOT NULL,
-    ticket_reservation_number INTEGER UNIQUE CHECK (ticket_reservation_number > 0) NOT NULL
+	auditorium_number INTEGER NOT NULL,
+	seat_ids NUMERIC(3)[] NOT NULL,
+    ticket_types VARCHAR(10)[] NOT NULL
 );

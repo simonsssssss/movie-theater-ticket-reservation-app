@@ -33,13 +33,13 @@ app.post('/movies', async (req, res) => {
 });
 
 app.post('/addTicketReservation', async (req, res) => {
-    const { full_name, email, movie_title, format, screening_time, auditorium_number, row_and_seat_numbers, ticket_types_and_prices, ticket_reservation_number } = req.body;
+    const { fullName, email, movieTitle, format, screeningTime, auditoriumNumber, seatIds, ticketTypes } = req.body;
     try {
-        const encryptedFullName = encrypt(full_name);
+        const encryptedFullName = encrypt(fullName);
         const encryptedEmail = encrypt(email);
         const newTicketReservation = await pool.query(
-            'INSERT INTO ticket_reservations (full_name, email, movie_title, format, screening_time, auditorium_number, row_and_seat_numbers, ticket_types_and_prices, ticket_reservation_number) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
-            [encryptedFullName, encryptedEmail, movie_title, format, screening_time, auditorium_number, row_and_seat_numbers, ticket_types_and_prices, ticket_reservation_number]
+            'INSERT INTO ticket_reservations (full_name, email, movie_title, format, screening_time, auditorium_number, seat_ids, ticket_types) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id',
+            [encryptedFullName, encryptedEmail, movieTitle, format, screeningTime, auditoriumNumber, seatIds, ticketTypes]
         );
         res.status(201).json(newTicketReservation.rows[0]); // Represents the first and presumably only row of the result set returned from the query
     } catch (err) {
