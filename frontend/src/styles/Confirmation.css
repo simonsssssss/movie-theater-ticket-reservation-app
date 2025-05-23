@@ -1,0 +1,42 @@
+.confirmation {
+    text-align: center;
+}
+
+#confirmation-h1-title-large {
+    color: white;
+    padding-top: 20px;
+}
+
+#confirmation-h1-title-small {
+    color: white;
+    font-size: 18px;
+    padding-top: 15px;
+    opacity: 60%;
+}
+
+.confirmation-space-1 {
+    margin-top: 75px;
+}
+
+.confirmation-row {
+    display: grid;
+    grid-template-columns: 50% auto; /* Defines two columns */
+    margin-bottom: 8px;
+    color: white;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.confirmation-label {
+    text-align: right;
+    margin-right: 8px;
+    opacity: 0.75;
+}
+
+.confirmation-value {
+    text-align: left;
+}
+
+.confirmation-space-2 {
+    padding-bottom: 20px;
+}

@@ -1,0 +1,30 @@
+:root {
+    --transition-1: background-color 0.3s ease;
+    --transition-2: opacity 0.3s ease;
+    --transition-3: transform 0.3s ease;
+    --border-radius-1: 10px;
+    --border-radius-2: 1px;
+    --shadow-1: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    --color-1: rgba(169, 169, 169, 0.83);
+    --color-2: rgba(0, 0, 0, 0.5);
+    --color-3: rgba(255, 255, 255, 0.80);
+    --translateY: translateY(-4px);
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+html {
+    background-color: black;
+}
+
+body {
+    background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.9)), url('https://img.freepik.com/free-vector/flat-design-movie-theater-background_23-2150998489.jpg?semt=ais_incoming') fixed center;
+    background-size: cover;
+}
+
+input[type="date"]::-webkit-datetime-edit {
+    display: none;
+}

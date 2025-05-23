@@ -1,0 +1,121 @@
+.movie-showtimes {
+    text-align: center;
+}
+
+#date-picker {
+    font-size: 40px;
+    border-radius: var(--border-radius-1);
+    transition: var(--transition-1);
+    border: 0;
+}
+
+#date-picker:hover {
+    background-color: gray;
+}
+
+#movie-showtimes-h1 {
+    color: white;
+    padding-top: 20px;
+}
+
+#no-date-selected-info {
+    border-radius: var(--border-radius-1);
+    font-size: 15px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.35;
+}
+
+.movies-list {
+    margin-top: 60px;
+    padding-bottom: 60px;
+}
+
+#movies-list-item {
+    border-radius: var(--border-radius-1);
+    background-color: var(--color-1);
+    color: black;
+    font-weight: 500;
+    max-width: 650px;
+    margin-top: 35px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#movies-list-item-title {
+    font-weight: 700;
+    font-size: 25px;
+}
+
+#movies-list-item-details {
+    font-size: 17px;
+}
+
+#movies-list-item-image-img {
+    box-shadow: var(--shadow-1);
+    border-radius: var(--border-radius-2);
+    max-width: 210px;
+}
+
+#movies-list-item-image {
+    margin-top: 10px;
+}
+
+.movies-list-item-image-wrapper {
+    position: relative;
+    display: inline-block; /* It ensures the wrapper fits the image size
+    because inline-block elements shrink or expand to enclose their content,
+    unlike block-level elements that typically occupy the full width of their container. */
+    cursor: pointer;
+}
+
+.movies-list-item-image-wrapper img {
+    display: block; /* By default, images are inline elements.
+    This changes it and as a result removes spacing below the image. */
+}
+
+.movies-list-item-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition-2);
+    opacity: 0;
+    background-color: var(--color-2);
+}
+
+.movies-list-item-image-wrapper:hover .movies-list-item-image-overlay {
+    opacity: 1;
+}
+
+#movies-list-item-image-overlay-i {
+    font-size: 80px;
+    color: white;
+}
+
+.modal-background {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+    width: 900px;
+}
+
+#movies-list-item-screening-time {
+    border-radius: var(--border-radius-1);
+    color: black;
+    padding: 5px;
+    background-color: var(--color-3);
+    transition: var(--transition-3);
+    cursor: pointer;
+}
+
+#movies-list-item-screening-time:hover {
+    transform: var(--translateY);
+}
