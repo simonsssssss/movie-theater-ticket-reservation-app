@@ -6,6 +6,7 @@ import { useEffect, useState} from 'react';
 function Seats() {
     const [seatIsSelected, setSeatIsSelected] = useState(Array(192).fill(false));
     const [decodedCookieValue, setDecodedCookieValue] = useState([]);
+    const [seatIds, setSeatIds] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
         const reservationCookie = getCookie(reservationCookieName);
@@ -20,6 +21,32 @@ function Seats() {
     useEffect(() => {
         setDecodedCookieValue([title, genre, durationInMinutes, format, screeningTime, auditoriumNumber]);
     }, [title, genre, durationInMinutes, format, screeningTime, auditoriumNumber]);
+    useEffect(() => {
+        const fetchReservedSeats = async () => {
+            try {
+                const response = await fetch('http://localhost:4000/getReservedSeatIds', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        movie_title: title,
+                        format: format,
+                        screening_time: screeningTime,
+                        auditorium_number: auditoriumNumber,
+                    }),
+                });
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                setSeatIds(data.seat_ids);
+            } catch (err) {
+                console.error('Error fetching reserved seats');
+            }
+        };
+        fetchReservedSeats();
+    },[title, format, screeningTime, auditoriumNumber]);
     const handleSeatSelection = (seatId) => {
         setSeatIsSelected((prevSelections) =>
             prevSelections.map((item, index) =>

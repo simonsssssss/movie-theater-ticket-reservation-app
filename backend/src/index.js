@@ -65,6 +65,24 @@ app.post('/addTicketReservation', async (req, res) => {
     }
 });
 
+app.post('/getReservedSeatIds', async (req, res) => {
+    const { movie_title, format, screening_time, auditorium_number } = req.body;
+    if (!movie_title || !format || !screening_time || !auditorium_number) {
+        return res.status(400).json({ error: 'Missing required fields' });
+    }
+    try {
+        const result = await pool.query(
+            'SELECT seat_ids FROM ticket_reservations WHERE movie_title = $1 AND format = $2 AND screening_time = $3 AND auditorium_number = $4',
+            [movie_title, format, screening_time, auditorium_number]
+        );
+        const seatIds = result.rows.map(row => row.seat_ids).flat(); // "map(row => row.seat_ids)" transforms the array of row objects into an array of seat_ids arrays and ".flat()" flattens the array of arrays into a single-level array
+        res.status(200).json({ seat_ids: seatIds });
+    } catch (err) {
+        console.error('Database error:', err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 app.listen(port, () => {
     const hostname = os.hostname();
     console.log(`Server is running. Port: ${port}. Host: ${hostname}.`);
