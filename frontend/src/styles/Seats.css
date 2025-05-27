@@ -60,7 +60,7 @@
     vertical-align: middle; /* Ensures that seats align vertically with row numbers */
 }
 
-.seats-seats-selection-screen-row-seat:hover {
+.seats-seats-selection-screen-row-seat:not(.reserved):hover { /* Apply hover effects only to seats that are not reserved */
     opacity: 50%;
     cursor: pointer;
 }

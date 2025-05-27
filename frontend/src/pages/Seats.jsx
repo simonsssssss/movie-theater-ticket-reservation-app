@@ -6,7 +6,7 @@ import { useEffect, useState} from 'react';
 function Seats() {
     const [seatIsSelected, setSeatIsSelected] = useState(Array(192).fill(false));
     const [decodedCookieValue, setDecodedCookieValue] = useState([]);
-    const [seatIds, setSeatIds] = useState([]);
+    const [reservedSeatIds, setReservedSeatIds] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
         const reservationCookie = getCookie(reservationCookieName);
@@ -40,7 +40,7 @@ function Seats() {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const data = await response.json();
-                setSeatIds(data.seat_ids);
+                setReservedSeatIds(data.seat_ids);
             } catch (err) {
                 console.error('Error fetching reserved seats');
             }
@@ -100,29 +100,53 @@ function Seats() {
                         <div className="seats-seats-selection-screen-row" key={rowIndex}>
                             <div className="seats-seats-selection-screen-row-number">{rowIndex + 1}</div>
                             {
-                                Array.from({ length: 8 }, (_, seatIndex) => (
-                                    <div
-                                        className="seats-seats-selection-screen-row-seat"
-                                        onClick={() => handleSeatSelection(rowIndex * 16 + seatIndex)}
-                                        style={{
-                                            backgroundColor: seatIsSelected[rowIndex * 16 + seatIndex] ? 'green' : ''
-                                        }}
-                                        key={seatIndex}>
-                                    </div>
-                                ))
+                                Array.from({ length: 8 }, (_, seatIndex) => {
+                                    const seatId = rowIndex * 16 + seatIndex;
+                                    const isReserved = reservedSeatIds.includes(seatId);
+                                    return (
+                                        <div
+                                            className={`seats-seats-selection-screen-row-seat${isReserved ? ' reserved' : ''}`}
+                                            onClick={() => {
+                                                if (!isReserved) {
+                                                    handleSeatSelection(seatId);
+                                                }
+                                            }}
+                                            style={{
+                                                backgroundColor: isReserved
+                                                    ? 'red'
+                                                    : seatIsSelected[seatId]
+                                                        ? 'green'
+                                                        : ''
+                                            }}
+                                            key={seatIndex}>
+                                        </div>
+                                    );
+                                })
                             }
                             <div className="seats-seats-selection-screen-row-alley"></div>
                             {
-                                Array.from({ length: 8 }, (_, seatIndex) => (
-                                    <div
-                                        className="seats-seats-selection-screen-row-seat"
-                                        onClick={() => handleSeatSelection(rowIndex * 16 + seatIndex + 8)}
-                                        style={{
-                                            backgroundColor: seatIsSelected[rowIndex * 16 + seatIndex + 8] ? 'green' : ''
-                                        }}
-                                        key={seatIndex}>
-                                    </div>
-                                ))
+                                Array.from({ length: 8 }, (_, seatIndex) => {
+                                    const seatId = rowIndex * 16 + seatIndex + 8;
+                                    const isReserved = reservedSeatIds.includes(seatId);
+                                    return (
+                                        <div
+                                            className={`seats-seats-selection-screen-row-seat${isReserved ? ' reserved' : ''}`}
+                                            onClick={() => {
+                                                if (!isReserved) {
+                                                    handleSeatSelection(seatId);
+                                                }
+                                            }}
+                                            style={{
+                                                backgroundColor: isReserved
+                                                    ? 'red'
+                                                    : seatIsSelected[seatId]
+                                                        ? 'green'
+                                                        : ''
+                                            }}
+                                            key={seatIndex}>
+                                        </div>
+                                    );
+                                })
                             }
                         </div>
                     ))
