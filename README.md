@@ -15,4 +15,5 @@ Aplikacja wykorzystuje następujące technologie:
 
 ## Film demonstracyjny
 Film przedstawia proces rezerwacji biletu.
+
 https://github.com/user-attachments/assets/1408ed45-585e-4585-a0f5-8d22dbfe3def
