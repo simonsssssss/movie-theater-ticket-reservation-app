@@ -5,10 +5,12 @@ Aplikacja internetowa oferująca przeglądanie repertuaru kinowego i rezerwację
 Aplikacja wykorzystuje następujące technologie:
 - [JavaScript]
 - [React]
+- [Node.js]
 - [Express]
 - [HTML]
 - [CSS]
 - [Bulma]
+- [PostgreSQL]
 - [SQL]
 
 ## Film demonstracyjny
