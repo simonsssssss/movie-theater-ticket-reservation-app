@@ -12,4 +12,4 @@ Aplikacja wykorzystuje następujące technologie:
 - [SQL]
 
 ## Film demonstracyjny
-### Film przedstawia proces rezerwacji biletu. W materiale pokazano wykorzystanie funkcjonalności aplikacji.
+Film przedstawia proces rezerwacji biletu. W materiale pokazano wykorzystanie funkcjonalności aplikacji.
