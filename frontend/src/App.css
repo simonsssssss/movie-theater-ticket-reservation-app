@@ -28,3 +28,18 @@ body {
 input[type="date"]::-webkit-datetime-edit {
     display: none;
 }
+
+.modal-background {
+    background-color: rgba(0, 0, 0, 1);
+}
+
+.modal-content {
+    width: 900px;
+}
+
+@media only screen and (max-width: 800px) { /* Apply styles for screens smaller than or equal to this value */
+    html {
+        width: 800px;
+        overflow-x: auto;
+    }
+}

@@ -13,6 +13,7 @@ function Movies() {
     const [dateIsSelected, setDateIsSelected] = useState(false);
     const [datePickerValue, setDatePickerValue] = useState(null);
     const [movies, setMovies] = useState([]);
+    const [scrollPosition, setScrollPosition] = useState(0);
     useEffect(() => {
         const fetchMovies = async () => {
             try {
@@ -56,12 +57,14 @@ function Movies() {
         }
     };
     const openModal = () => {
+        setScrollPosition(window.scrollY);
         setModalActive(true);
         document.body.style.overflow = 'hidden';
     };
     const closeModal = () => {
         document.body.style.overflow = '';
         setModalActive(false);
+        window.scrollTo(0, scrollPosition);
     };
     const handleClickForSelectedMovie = (movieId) => {
         setSelectedMovie(movieId);
